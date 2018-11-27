@@ -18,7 +18,7 @@ $(document).ready(() => {
 	// SET SLIDER WIDTH
 	slider.css('width', `${itemsCount * wholeItem}px`);
 
-	let sliderWidth = slider.width() - marginLeft - marginRight;
+	let sliderWidth = slider.width() + marginLeft + marginRight;
 
 	let maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
 
@@ -30,7 +30,7 @@ $(document).ready(() => {
 
 		slider.css('width', `${itemsCount * wholeItem}px`);
 
-		sliderWidth = slider.width() - marginLeft - marginRight;
+		sliderWidth = slider.width() + marginLeft + marginRight;
 
 		slider.css('margin-left', '0');
 		prevSlideButton.css('display', 'none');
@@ -38,8 +38,6 @@ $(document).ready(() => {
 
 		maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
 		nextCount = 1;
-
-		console.log(wholeItem);
 	});
 
 	// NEXT SLIDE
@@ -53,19 +51,23 @@ $(document).ready(() => {
 				showHideButton(nextSlideButton, 'lte', `-${maxSlide * wholeItem}`);
 			}
 		}
-
-		disableButton(nextSlideButton, 500);
 	});
 
 	// PREVIOUS SLIDE
 	prevSlideButton.click(() => {
-		slider.css('margin-left', `${(nextCount - 1) * -wholeItem + wholeItem}px`);
-		showHideButton(prevSlideButton, 'gte', -wholeItem);
-		nextCount--;
+		if (nextCount > 1) {
+			slider.css(
+				'margin-left',
+				`${(nextCount - 1) * -wholeItem + wholeItem}px`
+			);
+			nextCount--;
 
-		nextSlideButton.css('display', 'block');
+			if (nextCount <= 1) {
+				prevSlideButton.css('display', 'none');
+			}
 
-		disableButton(prevSlideButton, 500);
+			nextSlideButton.css('display', 'block');
+		}
 	});
 
 	// GET CURRENT MARGIN-LEFT VALUE OF THE SLIDER
@@ -88,13 +90,5 @@ $(document).ready(() => {
 				button.css('display', 'block');
 			}
 		}
-	}
-
-	// DISABLE BUTTON FOR 600MS AFTER CLICKING IT
-	function disableButton(button, disableTime) {
-		button.prop('disabled', true);
-		setTimeout(function() {
-			button.prop('disabled', false);
-		}, disableTime);
 	}
 });

@@ -21,7 +21,7 @@ body {
 }
 
 .slider-wrapper .slider-container {
-	max-width: 1129.5px;
+	max-width: calc(100% - 30px);
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -134,16 +134,19 @@ body {
 /* MEDIA QUERIES */
 @media all and (max-width: 1189.5px) {
 	.slider-wrapper {
-		margin-left: 0px;
-		margin-right: 0px;
+		width: 100%;
+	}
+	.slider-wrapper .slider-container {
+		width: calc(100% - 30px);
+		background-color: green;
 	}
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 3 - 24px);
+		width: calc(100vw / 3 - 20px);
 	}
 }
 
 @media all and (max-width: 550px) {
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 2 - 24px);
+		width: calc(100vw / 2 - 20px);
 	}
 }
