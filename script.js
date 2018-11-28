@@ -4,7 +4,7 @@ $(document).ready(() => {
 	let slider = $('.slider');
 
 	let item = $('.slider-container .slider .item');
-	let itemWidth = item.outerWidth();
+	let itemWidth = item.width();
 
 	let marginLeft = parseInt(item.css('margin-left').replace('px', ''));
 	let marginRight = parseInt(item.css('margin-right').replace('px', ''));
@@ -24,8 +24,9 @@ $(document).ready(() => {
 
 	// RECALCULATE ON WINDOW RESIZE
 	$(window).on('resize', () => {
+		maxSlide = 0;
 		sliderContainerWidth = $('.slider-container').width();
-		itemWidth = $('.item').outerWidth();
+		itemWidth = $('.item').width();
 		wholeItem = itemWidth + marginLeft + marginRight;
 
 		slider.css('width', `${itemsCount * wholeItem}px`);
