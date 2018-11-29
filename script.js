@@ -25,6 +25,8 @@ $(document).ready(() => {
 	// RECALCULATE ON WINDOW RESIZE
 	$(window).on('resize', () => {
 		maxSlide = 0;
+		nextCount = 1;
+
 		sliderContainerWidth = $('.slider-container').width();
 		itemWidth = $('.item').width();
 		wholeItem = itemWidth + marginLeft + marginRight;
@@ -38,7 +40,6 @@ $(document).ready(() => {
 		nextSlideButton.css('display', 'block');
 
 		maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
-		nextCount = 1;
 	});
 
 	// NEXT SLIDE
