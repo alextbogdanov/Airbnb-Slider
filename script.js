@@ -21,25 +21,36 @@ $(document).ready(() => {
 	let sliderWidth = slider.width() + marginLeft + marginRight;
 
 	let maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
+	// console.log(`${slider.width()} = ${itemsCount} * ${wholeItem}`);
 
 	// RECALCULATE ON WINDOW RESIZE
+	let resizeTimer;
+
 	$(window).on('resize', () => {
-		maxSlide = 0;
 		nextCount = 1;
 
-		sliderContainerWidth = $('.slider-container').width();
-		itemWidth = $('.item').width();
-		wholeItem = itemWidth + marginLeft + marginRight;
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function() {
+			sliderContainerWidth = $('.slider-container').width();
+			itemWidth = $('.item').width();
+			wholeItem = itemWidth + marginLeft + marginRight;
 
-		slider.css('width', `${itemsCount * wholeItem}px`);
+			slider.css('width', `${itemsCount * wholeItem}px`);
 
-		sliderWidth = slider.width() + marginLeft + marginRight;
+			sliderWidth = slider.width() + marginLeft + marginRight;
 
-		slider.css('margin-left', '0');
-		prevSlideButton.css('display', 'none');
-		nextSlideButton.css('display', 'block');
+			slider.css('margin-left', '0');
 
-		maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
+			maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
+
+			if ($(window).width() >= 700) {
+				prevSlideButton.css('display', 'none');
+				nextSlideButton.css('display', 'block');
+			} else {
+				prevSlideButton.css('display', 'none');
+				nextSlideButton.css('display', 'none');
+			}
+		}, 100);
 	});
 
 	// NEXT SLIDE
