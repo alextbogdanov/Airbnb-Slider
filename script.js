@@ -42,14 +42,6 @@ $(document).ready(() => {
 			slider.css('margin-left', '0');
 
 			maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
-
-			if ($(window).width() >= 700) {
-				prevSlideButton.css('display', 'none');
-				nextSlideButton.css('display', 'block');
-			} else {
-				prevSlideButton.css('display', 'none');
-				nextSlideButton.css('display', 'none');
-			}
 		}, 100);
 	});
 
