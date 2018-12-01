@@ -18,7 +18,7 @@ $(document).ready(() => {
 	// SET SLIDER WIDTH
 	slider.css('width', `${itemsCount * wholeItem}px`);
 
-	let sliderWidth = slider.width() + marginLeft + marginRight;
+	let sliderWidth = slider.outerWidth() + marginLeft + marginRight;
 
 	let maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
 	// console.log(`${slider.width()} = ${itemsCount} * ${wholeItem}`);
@@ -27,21 +27,32 @@ $(document).ready(() => {
 	let resizeTimer;
 
 	$(window).on('resize', () => {
-		nextCount = 1;
-
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(function() {
+			nextCount = 1;
+
 			sliderContainerWidth = $('.slider-container').width();
 			itemWidth = $('.item').width();
 			wholeItem = itemWidth + marginLeft + marginRight;
 
 			slider.css('width', `${itemsCount * wholeItem}px`);
 
-			sliderWidth = slider.width() + marginLeft + marginRight;
+			sliderWidth = slider.outerWidth() + marginLeft + marginRight;
 
 			slider.css('margin-left', '0');
+			$('.slider-container').animate({ scrollLeft: 0 });
+			prevSlideButton.css('display', 'none');
+
+			// console.log(`${itemsCount} * ${itemWidth} = ${sliderWidth}`);
 
 			maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
+
+			if ($(window).width() <= 850) {
+				nextSlideButton.css('display', 'none');
+			} else {
+				slider.css('margin-left', '0');
+				nextSlideButton.css('display', 'block');
+			}
 		}, 100);
 	});
 
