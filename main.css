@@ -159,6 +159,9 @@ body {
 	.slider-wrapper .slider-container::-webkit-scrollbar {
 		display: none;
 	}
+	.slider-wrapper .slider-container .slider .item {
+		width: calc(100vw / 3 - 50px);
+	}
 	.slider-wrapper .slider-navigation-button {
 		display: none;
 	}
@@ -181,6 +184,6 @@ body {
 
 @media only screen and (max-width: 550px) {
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 2 - 37px);
+		width: calc(100vw / 2 - 57px);
 	}
 }
