@@ -149,7 +149,7 @@ body {
 		margin: 0 0 0 15px;
 	}
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 3 - 20px);
+		width: calc(100vw / 3 - 19px);
 	}
 }
 
@@ -164,7 +164,7 @@ body {
 		display: none;
 	}
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 3 - 35px);
+		width: calc(100vw / 3 - 25px);
 		margin-left: 6px;
 		margin-right: 6px;
 	}
@@ -190,6 +190,6 @@ body {
 
 @media only screen and (max-width: 550px) {
 	.slider-wrapper .slider-container .slider .item {
-		width: calc(100vw / 2 - 47px);
+		width: calc(100vw / 2 - 35px);
 	}
 }
