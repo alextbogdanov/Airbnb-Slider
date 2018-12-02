@@ -21,40 +21,6 @@ $(document).ready(() => {
 	let sliderWidth = slider.outerWidth() + marginLeft + marginRight;
 
 	let maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
-	// console.log(`${slider.width()} = ${itemsCount} * ${wholeItem}`);
-
-	// RECALCULATE ON WINDOW RESIZE
-	let resizeTimer;
-
-	$(window).on('resize', () => {
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(function() {
-			nextCount = 1;
-
-			sliderContainerWidth = $('.slider-container').width();
-			itemWidth = $('.item').width();
-			wholeItem = itemWidth + marginLeft + marginRight;
-
-			slider.css('width', `${itemsCount * wholeItem}px`);
-
-			sliderWidth = slider.outerWidth() + marginLeft + marginRight;
-
-			slider.css('margin-left', '0');
-			$('.slider-container').animate({ scrollLeft: 0 });
-			prevSlideButton.css('display', 'none');
-
-			// console.log(`${itemsCount} * ${itemWidth} = ${sliderWidth}`);
-
-			maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
-
-			if ($(window).width() <= 850) {
-				nextSlideButton.css('display', 'none');
-			} else {
-				slider.css('margin-left', '0');
-				nextSlideButton.css('display', 'block');
-			}
-		}, 100);
-	});
 
 	// NEXT SLIDE
 	nextSlideButton.click(() => {
@@ -108,3 +74,48 @@ $(document).ready(() => {
 		}
 	}
 });
+
+// RECALCULATE ON WINDOW RESIZE
+
+let resizeTimer;
+
+$(window).on('resize', () => {
+	clearTimeout(resizeTimer);
+	resizeTimer = setTimeout(function() {
+		let sliderContainerWidth = $('.slider-container').width();
+		let itemsCount = $('.slider .item').length;
+		let slider = $('.slider');
+
+		let item = $('.slider-container .slider .item');
+		let itemWidth = item.width();
+
+		let marginLeft = parseInt(item.css('margin-left').replace('px', ''));
+		let marginRight = parseInt(item.css('margin-right').replace('px', ''));
+
+		let wholeItem = itemWidth + marginLeft + marginRight;
+		let nextSlideButton = $('#next-slide');
+		let prevSlideButton = $('#previous-slide');
+
+		let nextCount = 1;
+
+		// SET SLIDER WIDTH
+		slider.css('width', `${itemsCount * wholeItem}px`);
+
+		let sliderWidth = slider.outerWidth() + marginLeft + marginRight;
+
+		let maxSlide = Math.round((sliderWidth - sliderContainerWidth) / wholeItem);
+
+		slider.css('margin-left', '0');
+		$('.slider-container').animate({ scrollLeft: 0 });
+		prevSlideButton.css('display', 'none');
+
+		if ($(window).width() <= 850) {
+			nextSlideButton.css('display', 'none');
+		} else {
+			slider.css('margin-left', '0');
+			nextSlideButton.css('display', 'block');
+		}
+	}, 500);
+});
+
+//
